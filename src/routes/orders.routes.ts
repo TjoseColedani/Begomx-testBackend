@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getOrders, getOrderById, getOrderDetails, createOrder, updateOrder, updateOrderStatus, deleteOrder } from '../controllers/orders.controller';
+import { getOrders, getOrderById, getOrderDetails, createOrder, updateOrder, updateOrderStatus, deleteOrder, getOrderStats } from '../controllers/orders.controller';
 import { authenticateJWT } from '../middlewares/auth.middleware';
 import { body } from 'express-validator';
 import { validateRequest } from '../middlewares/validation.middleware';
@@ -10,6 +10,7 @@ router.use(authenticateJWT);
 
 router.get('/details', getOrderDetails);
 router.get('/', getOrders);
+router.get('/stats', getOrderStats);
 router.get('/:id', getOrderById);
 
 router.post('/', [
