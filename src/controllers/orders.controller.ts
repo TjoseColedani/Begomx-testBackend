@@ -35,6 +35,28 @@ export const getOrderById = async (req: Request, res: Response): Promise<void> =
     }
 };
 
+export const getOrderStats = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const stats = await Order.aggregate([
+            {
+                $group: {
+                    _id: '$status',
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        const formattedStats = stats.reduce((acc: any, curr: any) => {
+            acc[curr._id] = curr.count;
+            return acc;
+        }, {});
+
+        res.status(200).json({ success: true, data: formattedStats });
+    } catch (error: any) {
+        res.status(500).json({ success: false, data: { message: error.message } });
+    }
+};
+
 export const getOrderDetails = async (req: Request, res: Response): Promise<void> => {
     try {
         const orderDetails = await Order.aggregate([
