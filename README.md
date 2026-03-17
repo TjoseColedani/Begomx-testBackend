@@ -1,4 +1,4 @@
-# Logistics REST API Challenge
+# Begomx Challenge
 
 ## 📝 Descripción General de la API
 Este proyecto es una API REST escalable y robusta para la gestión logística de una flotilla de camiones. Permite administrar de forma centralizada usuarios, camiones, ubicaciones de origen/destino y órdenes de envío. Se han implementado buenas prácticas y arquitectura modular para garantizar seguridad, mantenibilidad y rendimiento óptimo en un entorno de producción.
@@ -20,7 +20,6 @@ El proyecto está construido sobre el ecosistema de JavaScript y Node.js, aprove
 ---
 
 ## 🏗 Arquitectura del Proyecto
-Se ha elegido una arquitectura dividida en capas lógicas (Patrón Modelo-Controlador-Rutas) para separar las responsabilidades de cada componente:
 
 - `src/models`: Modelos de Mongoose que definen los esquemas de bases de datos y su interacción.
 - `src/controllers`: Lógica de negocio (procesamiento de peticiones, llamadas a la base de datos).
@@ -140,7 +139,7 @@ Todos los siguientes endpoints de la cadena requieren inyectar el token Bearer e
 
 ## 🧠 Enfoque de Desarrollo
 Para resolver la estructuración de este Challenge Back-End, me enfoqué en una **Filosofía basada en la Prevención de Errores y Mantenibilidad**.
-Utilizando las capacidades estáticas robustas de TypeScript preparamos una pasarela a prueba de fallos desde antes que inicie en el framework Express.
+Utilizando las capacidades estáticas robustas de TypeScript preparé una pasarela a prueba de fallos desde antes que inicie en el framework Express.
 1. Se analizaron primero los objetos del mundo real y sus interconexiones de base de datos para no cruzar dependencias.
 2. Cada endpoint se enjauló validando entradas rigurosamente con expreso-validator antes de tocar en sí la base de datos (Ej: `place_id`, tipos de `status` válidos y protección por tokens robustos).
-3. Optamos por aprovechar las mejores capacidades de nuestra de la DB implementando Aggregation pipelines donde es sensato optimizar volumen o cruces de llaves externas (`$lookup`, `$group`). Escogí este camino para ofrecer una API escalable que no se degrade mientras las tablas en Mongo comiencen a escalar brutalmente.
+3. Opté por aprovechar las mejores capacidades de la DB implementando Aggregation pipelines donde es sensato optimizar volumen o cruces de llaves externas (`$lookup`, `$group`). Escogí este camino para ofrecer una API escalable que no se degrade mientras las tablas en Mongo comiencen a escalar brutalmente.
